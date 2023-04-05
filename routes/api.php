@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,10 @@ use App\Http\Controllers\PostController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('/login', [AuthenticationController::class, 'login'])->name('login');
+
+Route::post('/register', [UserController::class, 'store'])->name('users.store');
 
 Route::middleware('auth:sanctum')->controller(PostController::class)->group(function(){
 
@@ -42,8 +47,6 @@ Route::middleware('auth:sanctum')->controller(PostController::class)->group(func
 Route::middleware('auth:sanctum')->controller(UserController::class)->group(function(){
 
     Route::get('users', 'index')->name('users.index');
-
-    Route::post('users', 'store')->name('users.store');
 
     Route::get('users/create', 'create')->name('users.create');
 

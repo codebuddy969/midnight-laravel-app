@@ -13,9 +13,11 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::select('title', 'slug', 'content')->get();
+        $perPage = $request->input('per_page', 3);
+
+        $posts = Post::select('title', 'slug', 'content', 'created_at')->orderBy('created_at', 'desc')->paginate($perPage);
         
         return response()->json(['data' => $posts]);
     }
@@ -35,7 +37,7 @@ class PostController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:150',
-            'content' => 'required|string|escape'
+            'content' => 'required|string'
         ]);
 
         if ($validator->fails()) {

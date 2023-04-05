@@ -1,66 +1,74 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Task Description
 
-## About Laravel
+Objective:
+The goal of this test task is to assess your understanding of PHP, server-side frameworks, databases, and RESTful API design. You are required to build a simple, yet functional, web application with a basic user authentication system using the Laravel framework and MySQL.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Task Description:
+Set up a new Laravel project.
+Create a MySQL database and configure the connection settings in the Laravel project.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Design a database schema that includes the following tables:
+users: id, name, email, password, created_at, updated_at
+posts: id, user_id, title, content, created_at, updated_at
+Create migrations for the tables and run them.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Develop an API with the following endpoints:
+POST /api/register: Create a new user. Required fields: name, email, password.
+POST /api/login: Authenticate a user. Required fields: email, password. Return an access token on successful authentication.
+GET /api/posts: Retrieve a list of all posts. Accessible only to authenticated users.
+POST /api/posts: Create a new post. Required fields: title, content. Accessible only to authenticated users.
 
-## Learning Laravel
+Implement user authentication using Laravel's built-in authentication system, and protect the API routes accordingly.
+Write basic validation rules for the input fields (e.g., required, email format, password length).
+Optimize the performance of the API, including proper indexing and pagination for the list of posts.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Submission:
+Please submit your project as a compressed archive (ZIP, TAR, or similar) containing the entire Laravel project directory. Include a README file with clear instructions on how to set up and run the project, including any necessary environment configurations, database setup, and API usage examples.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Evaluation Criteria:
+Your submission will be evaluated based on the following criteria:
+Functionality: The application should work as described in the task description, with all endpoints functioning correctly.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Code quality: The code should be clean, efficient, and maintainable, adhering to best practices.
+Security: The application should properly handle user authentication and protect API routes.
+Performance: The application should demonstrate optimized performance and scalability.
+Documentation: The README file should provide clear and concise instructions for setting up and running the project.
 
-## Laravel Sponsors
+## API Documentation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+To use the app API follow the next steps:
 
-### Premium Partners
+- Install composer on your machine https://getcomposer.org
+- Clone the repository, open the console and type "composer install" to install dependencies
+- run "php artisan migrate --seed" - this command will create a database, tables and will fill it with faker rows (2 default users, 20 default posts)
+- run "php artisan serve" this command will run the app
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Usage guide
+As requested app API contains the following endpoints considering that you're running the app on localhost:8000
 
-## Contributing
+Login and Register routes:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Default seeded login credentials are:
+- admin@admin.com
+- password
 
-## Code of Conduct
+When user is registered it is added to the users table, then after you can login with previously registered credentials
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- [POST http://localhost:8000/api/login](http://localhost:8000/api/login).
+- [POST http://localhost:8000/api/register](http://localhost:8000/api/register). [https://prnt.sc/--uW-oL1RV-o](https://prnt.sc/--uW-oL1RV-o).
 
-## Security Vulnerabilities
+On each request posts are listed as 5 per page, to request the next page add "?page=2" parameter to the query. 
+Routes are protected so after login use bearer token [https://prnt.sc/oI5jmNY0WG-P](https://prnt.sc/oI5jmNY0WG-P). (valid for 180 minutes) otherwise it will throw you a login GET method not supported error.
+Also added relation one user can have many posts if needed.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- [GET http://localhost:8000/api/posts](http://localhost:8000/api/posts).
+- [GET http://localhost:8000/api/posts?page=2](http://localhost:8000/api/posts?page=2). [https://prnt.sc/Qj-2cGifw5Wq](https://prnt.sc/Qj-2cGifw5Wq)
 
-## License
+And to create a post [https://prnt.sc/qC4xh7sbtwdb](https://prnt.sc/qC4xh7sbtwdb)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- [POST http://localhost:8000/api/posts](http://localhost:8000/api/posts).
+
+Since resource controllers was generated, I added update/delete routes and methods as well (entire CRUD process) even if it was not required.
+
