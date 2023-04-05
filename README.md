@@ -42,6 +42,7 @@ To use the app API follow the next steps:
 
 - Install composer on your machine https://getcomposer.org
 - Clone the repository, open the console and type "composer install" to install dependencies
+- Rename .env.example to .env
 - run "php artisan migrate --seed" - this command will create a database, tables and will fill it with faker rows (2 default users, 20 default posts)
 - run "php artisan serve" this command will run the app
 
